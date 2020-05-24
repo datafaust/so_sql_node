@@ -20,8 +20,11 @@ app.get('/', (req, res) => res.send('wassup!'))
 
 //test records from myql
 app.get('/test',  function(req,res){
+    var plate = req.params.plate;
+    console.log(plate)
+    console.log('attempting connection')
     var sql = "SELECT * FROM platenet.my_data";
-    pool.query(sql, function(err, results) {
+    pool.query(sql, plate, function(err, results) {
         if(err) {
             return res.send(err)
         } else {
